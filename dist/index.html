@@ -1,116 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Swagger UI</title>
-  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
-  <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
-  <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
-  <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
-  <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
-  <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
-  <script src='lib/handlebars-2.0.0.js' type='text/javascript'></script>
-  <script src='lib/underscore-min.js' type='text/javascript'></script>
-  <script src='lib/backbone-min.js' type='text/javascript'></script>
-  <script src='swagger-ui.js' type='text/javascript'></script>
-  <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
-  <script src='lib/marked.js' type='text/javascript'></script>
-  <script src='lib/swagger-oauth.js' type='text/javascript'></script>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16"/>
+    <link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+    <link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
+    <link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+    <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
+    <link href='css/print.css' media='print' rel='stylesheet' type='text/css'/>
+    <script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+    <script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
+    <script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
+    <script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+    <script src='lib/handlebars-2.0.0.js' type='text/javascript'></script>
+    <script src='lib/underscore-min.js' type='text/javascript'></script>
+    <script src='lib/backbone-min.js' type='text/javascript'></script>
+    <script src='swagger-ui.js' type='text/javascript'></script>
+    <script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
+    <script src='lib/marked.js' type='text/javascript'></script>
+    <script src='lib/swagger-oauth.js' type='text/javascript'></script>
 
-  <!-- Some basic translations -->
-  <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
-  <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
-  <!-- <script src='lang/en.js' type='text/javascript'></script> -->
+    <!-- Some basic translations -->
+    <!-- <script src='lang/translator.js' type='text/javascript'></script> -->
+    <!-- <script src='lang/ru.js' type='text/javascript'></script> -->
+    <!-- <script src='lang/en.js' type='text/javascript'></script> -->
 
-  <script type="text/javascript">
-    $(function () {
-      var url = window.location.search.match(/url=([^&]+)/);
-      if (url && url.length > 1) {
-        url = decodeURIComponent(url[1]);
-      } else {
-        url = "http://petstore.swagger.io/v2/swagger.json";
-      }
+    <script type="text/javascript">
+        $(function () {
+            // Pre load translate...
+            if (window.SwaggerTranslator) {
+                window.SwaggerTranslator.translate();
+            }
+            window.swaggerUi = new SwaggerUi({
+                validatorUrl : null,
+                // http://www.willpeavy.com/minifier/
+                spec: {"swagger": "2.0", "info":{"version": "2.0", "title": "SemanticMD API", "description": "The SemanticMD API is a collection of endpoints aimed at machine learning tasks involving medical images.", "termsOfService": "http://semantic.md/tos.html", "contact":{"name": "contact@semantic.md"}}, "host": "api.semantic.md", "basePath": "/", "securityDefinitions":{"basicAuth":{"type": "basic", "description": "HTTP Basic Authentication. Works over `HTTPS`"}}, "schemes": [ "https"], "produces": [ "application/json"], "paths":{"/project/":{"post":{"description": "Projects provide a private workspace for API functionality. Project functionality includes uploading and tagging images, training models, and classifying images.", "tags": [ "Project"], "operationId": "Project Create", "produces": [ "application/json"], "parameters": [], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/ProjectCreateresponse"}}}}}, "/project/{project_id}":{"delete":{"description": "", "tags": [ "Project"], "operationId": "Project Delete", "produces": [ "application/json"], "parameters": [{"name": "project_id", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "ID of the project in form of an alphanumeric string"}], "responses":{"200":{"description": ""}}}}, "/tag/":{"get":{"description": "", "tags": [ "Tag"], "operationId": "List All Tags", "produces": [ "application/json"], "parameters": [{"name": "project_id", "in": "query", "required": true, "x-is-map": false, "type": "string", "description": "ID of the project in form of an alphanumeric string"}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/ListAllTagsresponse"}}}}}, "/tag/{tag_name}":{"get":{"description": "", "tags": [ "Tag"], "operationId": "Tag Details", "produces": [ "application/json"], "parameters": [{"name": "tag_name", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "e.g. malignant"},{"name": "project_id", "in": "query", "required": true, "x-is-map": false, "type": "string", "description": "ID of the project in form of an alphanumeric string"}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/TagDetailsresponse"}}}}, "post":{"description": "", "tags": [ "Tag"], "operationId": "Create/Update Tag", "produces": [ "application/json"], "parameters": [{"name": "tag_name", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "e.g. malignant"},{"name": "project_id", "in": "query", "required": true, "x-is-map": false, "type": "string", "description": "ID of the project in form of an alphanumeric string"}], "responses":{"200":{"description": ""}}}}, "/model/":{"get":{"description": "", "tags": [ "Model"], "operationId": "List All Models", "produces": [ "application/json"], "parameters": [], "responses":{"200":{"description": "", "schema":{"type": "array", "items":{"$ref": "#/definitions/ListAllModelsresponse"}}}}}}, "/model/{model_id}":{"get":{"description": "", "tags": [ "Model"], "operationId": "Model Details", "produces": [ "application/json"], "parameters": [{"name": "model_id", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "ID of the model in form of an alphanumeric string"}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/ModelDetailsresponse"}}}}, "post":{"description": "Classify an image and return the predictions, weights and activations for a particular model.", "tags": [ "Model"], "operationId": "Model Classify", "produces": [ "application/json"], "parameters": [{"name": "model_id", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "ID of the model in form of an alphanumeric string"},{"name": "body", "in": "body", "required": true, "x-is-map": false, "schema":{"type": "string"}}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/ModelClassifyresponse"}}}}}, "/model/{model_id}/classify/{job_id}":{"get":{"description": "", "tags": [ "Model"], "operationId": "Image Classification Status", "produces": [ "application/json"], "parameters": [{"name": "model_id", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "ID of the model in form of an alphanumeric string"},{"name": "job_id", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "ID of the image classification job in form of an alphanumeric string"}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/ImageClassificationStatusresponse"}}}}}, "/search/":{"post":{"description": "Compare an unknown image against a set of known images and return a top k list of similar images.", "tags": [ "Visual Search"], "operationId": "Visual Search", "produces": [ "application/json"], "parameters": [{"name": "body", "in": "body", "required": true, "x-is-map": false, "schema":{"type": "string"}}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/VisualSearchresponse"}}}}}, "/search/{job_id}":{"get":{"description": "", "tags": [ "Visual Search"], "operationId": "Visual Search Status", "produces": [ "application/json"], "parameters": [{"name": "job_id", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "id of the visual search job in form of an alphanumeric string"}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/VisualSearchStatusresponse"}}}}}, "/recognize/":{"post":{"description": "", "tags": [ "Visual Recognition"], "operationId": "Image Recognition", "produces": [ "application/json"], "parameters": [{"name": "body", "in": "body", "required": true, "x-is-map": false, "schema":{"type": "string"}}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/ImageRecognitionresponse"}}}}}, "/recognize/{job_id}":{"get":{"description": "", "tags": [ "Visual Recognition"], "operationId": "Image Recognition Status", "produces": [ "application/json"], "parameters": [{"name": "job_id", "in": "path", "required": true, "x-is-map": false, "type": "string", "description": "id of the image recognition job"}], "responses":{"200":{"description": "", "schema":{"$ref": "#/definitions/ImageRecognitionStatusresponse"}}}}}}, "definitions":{"ProjectCreateresponse":{"title": "Project Create response", "type": "object", "properties":{"project_id":{"type": "string"}}, "required": [ "project_id"]}, "ListAllTagsresponse":{"title": "List All Tags response", "type": "object", "properties":{"all_tags":{"type": "array", "items":{"type": "string"}}}, "required": [ "all_tags"]}, "TagDetailsresponse":{"title": "Tag Details response", "type": "object", "properties":{"tag_name":{"type": "string"}, "tag_images":{"type": "array", "items":{"type": "string"}}}, "required": [ "tag_name", "tag_images"]}, "ListAllModelsresponse":{"title": "List All Models response", "type": "object", "properties":{"status":{"type": "string"}, "name":{"type": "string"}, "id":{"type": "string"}}, "required": [ "status", "name", "id"]}, "ModelDetailsresponse":{"title": "Model Details response", "type": "object", "properties":{"model_id":{"type": "string"}, "status":{"type": "string"}, "dataset_id":{"type": "string"}}, "required": [ "model_id", "status", "dataset_id"]}, "ModelClassifyresponse":{"title": "Model Classify response", "type": "object", "properties":{"job_id":{"type": "string"}, "status":{"type": "string"}}, "required": [ "job_id", "status"]}, "ImageClassificationStatusresponse":{"title": "Image Classification Status response", "type": "object", "properties":{"job_id":{"type": "string"}, "result":{"type": "array", "items":{"type": "object"}}, "status":{"type": "string"}}, "required": [ "job_id", "result", "status"]}, "VisualSearchresponse":{"title": "Visual Search response", "type": "object", "properties":{"job_id":{"type": "string"}, "status":{"type": "string"}}, "required": [ "job_id", "status"]}, "VisualSearchStatusresponse":{"title": "Visual Search Status response", "type": "object", "properties":{"job_id":{"type": "string"}, "status":{"type": "string"}, "result":{"type": "object"}}, "required": [ "job_id", "status", "result"]}, "ImageRecognitionresponse":{"title": "Image Recognition response", "type": "object", "properties":{"job_id":{"type": "string"}, "status":{"type": "string"}}, "required": [ "job_id", "status"]}, "ImageRecognitionStatusresponse":{"title": "Image Recognition Status response", "type": "object", "properties":{"job_id":{"type": "string"}, "status":{"type": "string"}, "result":{"type": "object"}}, "required": [ "job_id", "status", "result"]}}},
+                dom_id: "swagger-ui-container",
+                supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+                onComplete: function (swaggerApi, swaggerUi) {
+                    if (window.SwaggerTranslator) {
+                        window.SwaggerTranslator.translate();
+                    }
 
-      // Pre load translate...
-      if(window.SwaggerTranslator) {
-        window.SwaggerTranslator.translate();
-      }
-      window.swaggerUi = new SwaggerUi({
-        url: url,
-        dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-        onComplete: function(swaggerApi, swaggerUi){
-          if(typeof initOAuth == "function") {
-            initOAuth({
-              clientId: "your-client-id",
-              clientSecret: "your-client-secret-if-required",
-              realm: "your-realms",
-              appName: "your-app-name", 
-              scopeSeparator: ","
+                    $('pre code').each(function (i, e) {
+                        hljs.highlightBlock(e)
+                    });
+                },
+                onFailure: function (data) {
+                    log("Unable to Load SemanticMD docs");
+                },
+                docExpansion: "none",
+                apisSorter: "alpha",
+                showRequestHeaders: false
             });
-          }
 
-          if(window.SwaggerTranslator) {
-            window.SwaggerTranslator.translate();
-          }
+            // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
+            /*
+             var apiKey = "myApiKeyXXXX123456789";
+             $('#input_apiKey').val(apiKey);
+             */
 
-          $('pre code').each(function(i, e) {
-            hljs.highlightBlock(e)
-          });
+            window.swaggerUi.load();
 
-          addApiKeyAuthorization();
-        },
-        onFailure: function(data) {
-          log("Unable to Load SwaggerUI");
-        },
-        docExpansion: "none",
-        apisSorter: "alpha",
-        showRequestHeaders: false
-      });
+            function log() {
+                if ('console' in window) {
+                    console.log.apply(console, arguments);
+                }
+            }
+        });
 
-      function addApiKeyAuthorization(){
-        var key = encodeURIComponent($('#input_apiKey')[0].value);
-        if(key && key.trim() != "") {
-            var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
-            window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
-            log("added key " + key);
+        function updateAuth() {
+            var auth = "Basic " + btoa($('#input_user')[0].value + ":" + $('#input_pass')[0].value);
+            window.authorizations.add("key", new SwaggerClient.ApiKeyAuthorization("Authorization", auth, "header"));
+            window.swaggerUi.load();
+            $('#input_user').val('');
+            $('#input_pass').val('');
         }
-      }
-
-      $('#input_apiKey').change(addApiKeyAuthorization);
-
-      // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
-      /*
-        var apiKey = "myApiKeyXXXX123456789";
-        $('#input_apiKey').val(apiKey);
-      */
-
-      window.swaggerUi.load();
-
-      function log() {
-        if ('console' in window) {
-          console.log.apply(console, arguments);
-        }
-      }
-  });
-  </script>
+    </script>
 </head>
 
 <body class="swagger-section">
 <div id='header'>
-  <div class="swagger-ui-wrap">
-    <a id="logo" href="http://semantic.md">SemanticMD</a>
- <form id='api_selector'>
-      <div class='input'><input placeholder="user" id="input_user" name="user" type="text" size="10"/></div>
-      <div class='input'><input placeholder="pass" id="input_pass" name="pass" type="password" size="10"/></div>
-      <div class='input'><a id="login" href="#" data-sw-translate>Login</a></div>
-    </form>
-  </div>
+    <div class="swagger-ui-wrap">
+        <a id="logo" href="http://semantic.md">SemanticMD</a>
+
+        <form id='api_selector'>
+            <div class='input'><input placeholder="email" id="input_user" name="user" type="text" size="10"/></div>
+            <div class='input'><input placeholder="password" id="input_pass" name="pass" type="password" size="10"/>
+            </div>
+            <div class='input'><a id="explore" onclick="updateAuth();" href="#" data-sw-translate>Login</a></div>
+        </form>
+    </div>
 </div>
 
 <div id="message-bar" class="swagger-ui-wrap" data-sw-translate>&nbsp;</div>
