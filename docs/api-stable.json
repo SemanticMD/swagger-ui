@@ -42,6 +42,9 @@
                         "schema": {
                             "$ref": "#/definitions/ProjectCreateresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -63,12 +66,15 @@
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the project in form of an alphanumeric string"
+                        "description": "ID of the Project"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "Project successfully deleted."
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -86,11 +92,12 @@
                 "parameters": [
                     {
                         "name": "project_id",
-                        "in": "query",
+                        "in": "formData",
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the project in form of an alphanumeric string"
+                        "default": "563bd73414bdf77385ffc209",
+                        "description": "ID of the Project"
                     }
                 ],
                 "responses": {
@@ -99,6 +106,9 @@
                         "schema": {
                             "$ref": "#/definitions/ListAllTagsresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -124,19 +134,23 @@
                     },
                     {
                         "name": "project_id",
-                        "in": "query",
+                        "in": "form",
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the project in form of an alphanumeric string"
+                        "default": "563bd73414bdf77385ffc209",
+                        "description": "ID of the Project"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "Image uploaded/added successfully to Tag object.",
                         "schema": {
                             "$ref": "#/definitions/TagDetailsresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             },
@@ -146,6 +160,9 @@
                     "Tag"
                 ],
                 "operationId": "Create/Update Tag",
+                "consumes": [
+                  "application/x-www-form-urlencoded"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -156,54 +173,83 @@
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "e.g. malignant"
+                        "default": "malignant",
+                        "description": ""
                     },
                     {
                         "name": "project_id",
-                        "in": "query",
+                        "in": "formData",
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
                         "default": "563bd73414bdf77385ffc209",
-                        "description": "ID of the project in form of an alphanumeric string"
+                        "description": ""
+                    },
+                    {
+                        "name": "image_url",
+                        "in": "formData",
+                        "required": false,
+                        "x-is-map": false,
+                        "type": "string",
+                        "default": "https://upload.wikimedia.org/wikipedia/commons/2/26/Fundus_of_eye_normal.jpg",
+                        "description": "image URL"
+                    },
+                    {
+                        "name": "image_data",
+                        "in": "formData",
+                        "required": false,
+                        "x-is-map": false,
+                        "type": "string",
+                        "format": "byte",
+                        "description": "image file"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": ""
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
         },
         "/model/": {
-            "get": {
+            "post": {
                 "description": "Models encapsulate different kinds of machine learning models. This includes image classifiers, video classifiers, and object segmentation algorithms. Current implementation only allows a Model object to exist within a Project.",
                 "tags": [
                     "Model"
                 ],
                 "operationId": "List All Models",
+                "consumes": [
+                  "application/x-www-form-urlencoded"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
                         "name": "project_id",
-                        "in": "query",
+                        "in": "formData",
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the project in form of an alphanumeric string"
+                        "default": "563bd73414bdf77385ffc209",
+                        "description": ""
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Returns a list of all the Models trained for a particular Project.",
+                        "description": "Returns a list of all the Models trained for a given Project.",
                         "schema": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/ListAllModelsresponse"
                             }
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -225,7 +271,7 @@
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the model in form of an alphanumeric string"
+                        "description": "ID of the model"
                     }
                 ],
                 "responses": {
@@ -234,6 +280,9 @@
                         "schema": {
                             "$ref": "#/definitions/ModelDetailsresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             },
@@ -243,6 +292,9 @@
                     "Model"
                 ],
                 "operationId": "Model Classify",
+                "consumes": [
+                  "application/x-www-form-urlencoded"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -253,7 +305,7 @@
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the model in form of an alphanumeric string"
+                        "description": "ID of the model"
                     },
                     {
                         "name": "body",
@@ -271,6 +323,9 @@
                         "schema": {
                             "$ref": "#/definitions/ModelClassifyresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -292,7 +347,7 @@
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the model in form of an alphanumeric string"
+                        "description": "ID of the model"
                     },
                     {
                         "name": "job_id",
@@ -300,7 +355,7 @@
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "ID of the image classification job in form of an alphanumeric string"
+                        "description": "ID of the image classification job"
                     }
                 ],
                 "responses": {
@@ -309,6 +364,9 @@
                         "schema": {
                             "$ref": "#/definitions/ImageClassificationStatusresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -320,19 +378,13 @@
                     "Visual Search"
                 ],
                 "operationId": "Visual Search",
+                "consumes": [
+                  "application/x-www-form-urlencoded"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "x-is-map": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -340,6 +392,9 @@
                         "schema": {
                             "$ref": "#/definitions/VisualSearchresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -361,7 +416,7 @@
                         "required": true,
                         "x-is-map": false,
                         "type": "string",
-                        "description": "id of the visual search job in form of an alphanumeric string"
+                        "description": "id of the visual search job"
                     }
                 ],
                 "responses": {
@@ -370,6 +425,9 @@
                         "schema": {
                             "$ref": "#/definitions/VisualSearchStatusresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -381,19 +439,13 @@
                     "Visual Recognition"
                 ],
                 "operationId": "Image Recognition",
+                "consumes": [
+                  "application/x-www-form-urlencoded"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "x-is-map": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -401,6 +453,9 @@
                         "schema": {
                             "$ref": "#/definitions/ImageRecognitionresponse"
                         }
+                    },
+                    "403": {
+                        "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
                     }
                 }
             }
@@ -412,6 +467,9 @@
                     "Visual Recognition"
                 ],
                 "operationId": "Image Recognition Status",
+                "consumes": [
+                  "application/x-www-form-urlencoded"
+                ],
                 "produces": [
                     "application/json"
                 ],
