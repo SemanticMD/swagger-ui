@@ -92,7 +92,7 @@
         "parameters": [
           {
             "name": "project_id",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "x-is-map": false,
             "type": "string",
@@ -114,8 +114,8 @@
       }
     },
     "/tag/{tag_name}": {
-      "post": {
-        "description": "Creates/Updates a Tag object.",
+      "get": {
+        "description": "Retrieve all image URLs associated with Tag object",
         "tags": [
           "Tag"
         ],
@@ -130,11 +130,11 @@
             "required": true,
             "x-is-map": false,
             "type": "string",
-            "description": "e.g. malignant"
+            "description": ""
           },
           {
             "name": "project_id",
-            "in": "formData",
+            "in": "query",
             "required": true,
             "x-is-map": false,
             "type": "string",
@@ -144,7 +144,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Image uploaded/added successfully to Tag object.",
+            "description": "Tag details successfully retrieved.",
             "schema": {
               "$ref": "#/definitions/TagDetailsresponse"
             }
@@ -155,7 +155,7 @@
         }
       },
       "post": {
-        "description": "Uploads image file or copies image URL to be associated with a Tag object specified by 'tag_name'.",
+        "description": "Uploads image file or copies image URL to be associated with a Tag object.",
         "tags": [
           "Tag"
         ],
@@ -206,7 +206,7 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Image uploaded/added successfully to Tag object."
           },
           "403": {
             "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
