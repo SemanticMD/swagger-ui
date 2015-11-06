@@ -347,430 +347,432 @@
               "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
             }
           }
-        },
-        "/model/{model_id}/classify/{job_id}": {
-          "get": {
-            "description": "",
-            "tags": [
-              "Model"
-            ],
-            "operationId": "Image Classification Status",
-            "consumes": [
-              "application/x-www-form-urlencoded"
-            ],
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "model_id",
-                "in": "path",
-                "required": true,
-                "x-is-map": false,
-                "type": "string",
-                "description": "ID of the model"
-              },
-              {
-                "name": "classify_job_id",
-                "in": "path",
-                "required": true,
-                "x-is-map": false,
-                "type": "string",
-                "description": "ID of the image classification job"
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "",
-                "schema": {
-                  "$ref": "#/definitions/ImageClassificationStatusresponse"
-                }
-              },
-              "403": {
-                "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
-              }
+        }
+      },
+      "/model/{model_id}/classify/{job_id}": {
+        "get": {
+          "description": "",
+          "tags": [
+            "Model"
+          ],
+          "operationId": "Image Classification Status",
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "model_id",
+              "in": "path",
+              "required": true,
+              "x-is-map": false,
+              "type": "string",
+              "description": "ID of the model"
+            },
+            {
+              "name": "classify_job_id",
+              "in": "path",
+              "required": true,
+              "x-is-map": false,
+              "type": "string",
+              "description": "ID of the image classification job"
             }
-          }
-        },
-        "/search/": {
-          "post": {
-            "description": "Compare an unknown image against a set of known images and return the top k similar images.",
-            "tags": [
-              "Visual Search"
-            ],
-            "operationId": "Visual Search",
-            "consumes": [
-              "application/x-www-form-urlencoded"
-            ],
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "project_id",
-                "in": "path",
-                "required": true,
-                "x-is-map": false,
-                "type": "string",
-                "description": "ID of the Project"
-              },
-              {
-                "name": "modality",
-                "in": "path",
-                "required": false,
-                "x-is-map": false,
-                "type": "string",
-                "description": ""
-              },
-              {
-                "name": "k",
-                "in": "path",
-                "required": false,
-                "x-is-map": false,
-                "type": "string",
-                "description": "Number of results to return."
-              },
-              {
-                "name": "modality",
-                "in": "path",
-                "required": false,
-                "x-is-map": false,
-                "type": "string",
-                "description": ""
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/ImageClassificationStatusresponse"
               }
-            ],
-            "responses": {
-              "200": {
-                "description": "",
-                "schema": {
-                  "$ref": "#/definitions/VisualSearchresponse"
-                }
-              },
-              "403": {
-                "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
-              }
-            }
-          }
-        },
-        "/search/{job_id}": {
-          "get": {
-            "description": "",
-            "tags": [
-              "Visual Search"
-            ],
-            "operationId": "Visual Search Status",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "job_id",
-                "in": "path",
-                "required": true,
-                "x-is-map": false,
-                "type": "string",
-                "description": "ID of the visual search job"
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "",
-                "schema": {
-                  "$ref": "#/definitions/VisualSearchStatusresponse"
-                }
-              },
-              "403": {
-                "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
-              }
-            }
-          }
-        },
-        "/recognize/": {
-          "post": {
-            "description": "",
-            "tags": [
-              "Visual Recognition"
-            ],
-            "operationId": "Image Recognition",
-            "consumes": [
-              "application/x-www-form-urlencoded"
-            ],
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "project_id",
-                "in": "formData",
-                "required": false,
-                "x-is-map": false,
-                "type": "string",
-                "default": "563bd73414bdf77385ffc209",
-                "description": ""
-              },
-              {
-                "name": "image_url",
-                "in": "formData",
-                "required": false,
-                "x-is-map": false,
-                "type": "string",
-                "default": "https://upload.wikimedia.org/wikipedia/commons/2/26/Fundus_of_eye_normal.jpg",
-                "description": "image URL"
-              },
-              {
-                "name": "image_data",
-                "in": "formData",
-                "required": false,
-                "x-is-map": false,
-                "type": "string",
-                "format": "byte",
-                "description": "image file"
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "",
-                "schema": {
-                  "$ref": "#/definitions/ImageRecognitionresponse"
-                }
-              },
-              "403": {
-                "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
-              }
-            }
-          }
-        },
-        "/recognize/{job_id}": {
-          "get": {
-            "description": "",
-            "tags": [
-              "Visual Recognition"
-            ],
-            "operationId": "Image Recognition Status",
-            "produces": [
-              "application/json"
-            ],
-            "parameters": [
-              {
-                "name": "job_id",
-                "in": "path",
-                "required": true,
-                "x-is-map": false,
-                "type": "string",
-                "description": "ID of the image recognition job"
-              }
-            ],
-            "responses": {
-              "200": {
-                "description": "",
-                "schema": {
-                  "$ref": "#/definitions/ImageRecognitionStatusresponse"
-                }
-              },
-              "403": {
-                "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
-              }
+            },
+            "403": {
+              "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
             }
           }
         }
       },
-      "definitions": {
-        "ProjectCreateresponse": {
-          "title": "Project Create response",
-          "type": "object",
-          "properties": {
-            "project_id": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "project_id"
-          ]
-        },
-        "ListAllTagsresponse": {
-          "title": "List All Tags response",
-          "type": "object",
-          "properties": {
-            "all_tags": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "required": [
-            "all_tags"
-          ]
-        },
-        "TagDetailsresponse": {
-          "title": "Tag Details response",
-          "type": "object",
-          "properties": {
-            "tag_name": {
-              "type": "string"
+      "/search/": {
+        "post": {
+          "description": "Compare an unknown image against a set of known images and return the top k similar images.",
+          "tags": [
+            "Visual Search"
+          ],
+          "operationId": "Visual Search",
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "project_id",
+              "in": "path",
+              "required": true,
+              "x-is-map": false,
+              "type": "string",
+              "description": "ID of the Project"
             },
-            "tag_images": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+            {
+              "name": "modality",
+              "in": "path",
+              "required": false,
+              "x-is-map": false,
+              "type": "string",
+              "description": ""
+            },
+            {
+              "name": "k",
+              "in": "path",
+              "required": false,
+              "x-is-map": false,
+              "type": "string",
+              "description": "Number of results to return."
+            },
+            {
+              "name": "modality",
+              "in": "path",
+              "required": false,
+              "x-is-map": false,
+              "type": "string",
+              "description": ""
             }
-          },
-          "required": [
-            "tag_name",
-            "tag_images"
-          ]
-        },
-        "ModelCreateresponse": {
-          "title": "Model create response",
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "training_job_id": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "status",
-            "training_job_id"
-          ]
-        },
-        "ModelDetailsresponse": {
-          "title": "Model Details response",
-          "type": "object",
-          "properties": {
-            "training_job_id": {
-              "type": "string"
-            },
-            "status": {
-              "type": "string"
-            },
-            "result": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "training_job_id",
-            "status",
-            "result"
-          ]
-        },
-        "ModelClassifyresponse": {
-          "title": "Model Classify response",
-          "type": "object",
-          "properties": {
-            "classify_job_id": {
-              "type": "string"
-            },
-            "status": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "classify_job_id",
-            "status"
-          ]
-        },
-        "ImageClassificationStatusresponse": {
-          "title": "Image Classify Status response",
-          "type": "object",
-          "properties": {
-            "classify_job_id": {
-              "type": "string"
-            },
-            "result": {
-              "type": "array",
-              "items": {
-                "type": "object"
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/VisualSearchresponse"
               }
             },
-            "status": {
-              "type": "string"
+            "403": {
+              "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
             }
-          },
-          "required": [
-            "classify_job_id",
-            "result",
-            "status"
-          ]
-        },
-        "VisualSearchresponse": {
-          "title": "Visual Search response",
-          "type": "object",
-          "properties": {
-            "job_id": {
-              "type": "string"
-            },
-            "status": {
-              "type": "string"
+          }
+        }
+      },
+      "/search/{job_id}": {
+        "get": {
+          "description": "",
+          "tags": [
+            "Visual Search"
+          ],
+          "operationId": "Visual Search Status",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "job_id",
+              "in": "path",
+              "required": true,
+              "x-is-map": false,
+              "type": "string",
+              "description": "ID of the visual search job"
             }
-          },
-          "required": [
-            "job_id",
-            "status"
-          ]
-        },
-        "VisualSearchStatusresponse": {
-          "title": "Visual Search Status response",
-          "type": "object",
-          "properties": {
-            "job_id": {
-              "type": "string"
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/VisualSearchStatusresponse"
+              }
             },
-            "status": {
-              "type": "string"
-            },
-            "result": {
-              "type": "object"
+            "403": {
+              "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
             }
-          },
-          "required": [
-            "job_id",
-            "status",
-            "result"
-          ]
-        },
-        "ImageRecognitionresponse": {
-          "title": "Image Recognition response",
-          "type": "object",
-          "properties": {
-            "job_id": {
-              "type": "string"
+          }
+        }
+      },
+      "/recognize/": {
+        "post": {
+          "description": "",
+          "tags": [
+            "Visual Recognition"
+          ],
+          "operationId": "Image Recognition",
+          "consumes": [
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "project_id",
+              "in": "formData",
+              "required": false,
+              "x-is-map": false,
+              "type": "string",
+              "default": "563bd73414bdf77385ffc209",
+              "description": ""
             },
-            "status": {
-              "type": "string"
+            {
+              "name": "image_url",
+              "in": "formData",
+              "required": false,
+              "x-is-map": false,
+              "type": "string",
+              "default": "https://upload.wikimedia.org/wikipedia/commons/2/26/Fundus_of_eye_normal.jpg",
+              "description": "image URL"
             },
-            "tags": {
-              "type": "array"
+            {
+              "name": "image_data",
+              "in": "formData",
+              "required": false,
+              "x-is-map": false,
+              "type": "string",
+              "format": "byte",
+              "description": "image file"
             }
-          },
-          "required": [
-            "job_id",
-            "status",
-            "tags"
-          ]
-        },
-        "ImageRecognitionStatusresponse": {
-          "title": "Image Recognition Status response",
-          "type": "object",
-          "properties": {
-            "job_id": {
-              "type": "string"
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/ImageRecognitionresponse"
+              }
             },
-            "status": {
-              "type": "string"
-            },
-            "result": {
-              "type": "object"
+            "403": {
+              "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
             }
-          },
-          "required": [
-            "job_id",
-            "status",
-            "result"
-          ]
+          }
+        }
+      },
+      "/recognize/{job_id}": {
+        "get": {
+          "description": "",
+          "tags": [
+            "Visual Recognition"
+          ],
+          "operationId": "Image Recognition Status",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "job_id",
+              "in": "path",
+              "required": true,
+              "x-is-map": false,
+              "type": "string",
+              "description": "ID of the image recognition job"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "$ref": "#/definitions/ImageRecognitionStatusresponse"
+              }
+            },
+            "403": {
+              "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
+            }
+          }
         }
       }
     }
+  },
+  "definitions": {
+    "ProjectCreateresponse": {
+      "title": "Project Create response",
+      "type": "object",
+      "properties": {
+        "project_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "project_id"
+      ]
+    },
+    "ListAllTagsresponse": {
+      "title": "List All Tags response",
+      "type": "object",
+      "properties": {
+        "all_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "all_tags"
+      ]
+    },
+    "TagDetailsresponse": {
+      "title": "Tag Details response",
+      "type": "object",
+      "properties": {
+        "tag_name": {
+          "type": "string"
+        },
+        "tag_images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tag_name",
+        "tag_images"
+      ]
+    },
+    "ModelCreateresponse": {
+      "title": "Model create response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "training_job_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "training_job_id"
+      ]
+    },
+    "ModelDetailsresponse": {
+      "title": "Model Details response",
+      "type": "object",
+      "properties": {
+        "training_job_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "result": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "training_job_id",
+        "status",
+        "result"
+      ]
+    },
+    "ModelClassifyresponse": {
+      "title": "Model Classify response",
+      "type": "object",
+      "properties": {
+        "classify_job_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "classify_job_id",
+        "status"
+      ]
+    },
+    "ImageClassificationStatusresponse": {
+      "title": "Image Classify Status response",
+      "type": "object",
+      "properties": {
+        "classify_job_id": {
+          "type": "string"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "classify_job_id",
+        "result",
+        "status"
+      ]
+    },
+    "VisualSearchresponse": {
+      "title": "Visual Search response",
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_id",
+        "status"
+      ]
+    },
+    "VisualSearchStatusresponse": {
+      "title": "Visual Search Status response",
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "result": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "job_id",
+        "status",
+        "result"
+      ]
+    },
+    "ImageRecognitionresponse": {
+      "title": "Image Recognition response",
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array"
+        }
+      },
+      "required": [
+        "job_id",
+        "status",
+        "tags"
+      ]
+    },
+    "ImageRecognitionStatusresponse": {
+      "title": "Image Recognition Status response",
+      "type": "object",
+      "properties": {
+        "job_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "result": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "job_id",
+        "status",
+        "result"
+      ]
+    }
+  }
+}
