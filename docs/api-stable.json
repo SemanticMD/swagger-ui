@@ -114,8 +114,8 @@
       }
     },
     "/tag/{tag_name}": {
-      "get": {
-        "description": "Returns a Tag object.",
+      "post": {
+        "description": "Creates/Updates a Tag object.",
         "tags": [
           "Tag"
         ],
@@ -134,7 +134,7 @@
           },
           {
             "name": "project_id",
-            "in": "form",
+            "in": "formData",
             "required": true,
             "x-is-map": false,
             "type": "string",
@@ -294,6 +294,7 @@
             "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
           }
         }
+      }
       },
       "/model/{model_id}/classify/": {
         "post": {
@@ -349,7 +350,7 @@
           }
         }
       },
-      "/model/{model_id}/classify/{job_id}": {
+      "/model/{model_id}/classify/{classify_job_id}": {
         "get": {
           "description": "",
           "tags": [
@@ -409,7 +410,7 @@
           "parameters": [
             {
               "name": "project_id",
-              "in": "path",
+              "in": "formData",
               "required": true,
               "x-is-map": false,
               "type": "string",
@@ -417,7 +418,7 @@
             },
             {
               "name": "modality",
-              "in": "path",
+              "in": "formData",
               "required": false,
               "x-is-map": false,
               "type": "string",
@@ -425,19 +426,11 @@
             },
             {
               "name": "k",
-              "in": "path",
+              "in": "formData",
               "required": false,
               "x-is-map": false,
               "type": "string",
               "description": "Number of results to return."
-            },
-            {
-              "name": "modality",
-              "in": "path",
-              "required": false,
-              "x-is-map": false,
-              "type": "string",
-              "description": ""
             }
           ],
           "responses": {
@@ -574,8 +567,7 @@
           }
         }
       }
-    }
-  },
+    },
   "definitions": {
     "ProjectCreateresponse": {
       "title": "Project Create response",
@@ -745,7 +737,10 @@
           "type": "string"
         },
         "tags": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
