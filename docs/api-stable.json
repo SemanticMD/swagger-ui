@@ -96,7 +96,7 @@
             "required": true,
             "x-is-map": false,
             "type": "string",
-            "default": "563bd73414bdf77385ffc209",
+              "default": "563fa6bc14bdf737dff5b93a",
             "description": "ID of the Project"
           }
         ],
@@ -130,6 +130,7 @@
             "required": true,
             "x-is-map": false,
             "type": "string",
+            "default": "demo",
             "description": ""
           },
           {
@@ -138,7 +139,7 @@
             "required": true,
             "x-is-map": false,
             "type": "string",
-            "default": "563bd73414bdf77385ffc209",
+            "default": "563fa6bc14bdf737dff5b93a",
             "description": "ID of the Project"
           }
         ],
@@ -173,7 +174,7 @@
             "required": true,
             "x-is-map": false,
             "type": "string",
-            "default": "malignant",
+            "default": "demo",
             "description": ""
           },
           {
@@ -182,7 +183,7 @@
             "required": true,
             "x-is-map": false,
             "type": "string",
-            "default": "563bd73414bdf77385ffc209",
+            "default": "563fa6bc14bdf737dff5b93a",
             "description": ""
           },
           {
@@ -234,7 +235,7 @@
             "required": true,
             "x-is-map": false,
             "type": "string",
-            "default": "563bd73414bdf77385ffc209",
+            "default": "563fa6bc14bdf737dff5b93a",
             "description": ""
           },
           {
@@ -261,9 +262,7 @@
             "description": "Unauthorized access. Please login or contact support@semantic.md for further assistance."
           }
         }
-      }
-    },
-    "/model/{model_id}": {
+      },
       "get": {
         "description": "Get details on model training progress.",
         "tags": [
@@ -275,12 +274,13 @@
         ],
         "parameters": [
           {
-            "name": "model_id",
-            "in": "path",
+            "name": "project_id",
+            "in": "query",
             "required": true,
             "x-is-map": false,
             "type": "string",
-            "description": "ID of the model"
+            "default": "563fa6bc14bdf737dff5b93a",
+            "description": ""
           }
         ],
         "responses": {
@@ -499,7 +499,7 @@
               "required": false,
               "x-is-map": false,
               "type": "string",
-              "default": "563bd73414bdf77385ffc209",
+              "default": "563fa6bc14bdf737dff5b93a",
               "description": ""
             },
             {
@@ -635,20 +635,16 @@
       "title": "Model Details response",
       "type": "object",
       "properties": {
-        "training_job_id": {
-          "type": "string"
-        },
         "status": {
           "type": "string"
         },
-        "result": {
+        "model_id": {
           "type": "string"
         }
       },
       "required": [
-        "training_job_id",
         "status",
-        "result"
+        "model_id"
       ]
     },
     "ModelClassifyresponse": {
